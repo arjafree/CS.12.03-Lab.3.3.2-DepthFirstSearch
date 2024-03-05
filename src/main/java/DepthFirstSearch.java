@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class DepthFirstSearch {
@@ -45,39 +46,31 @@ public class DepthFirstSearch {
 
     public static int[] depthFirstSearch(int[][] graph) {
 
-        // Create a stack.
+        int numNodes = graph.length;
+        boolean[] visited = new boolean[numNodes];
+        int[] path = new int[numNodes];
+        int pathIndex = 0;
+        Stack<Integer> stack = new Stack<>();
 
-        // Create an array called visited. This will keep track of which nodes we have visited.
+        int startNode = 0;
 
-        // Create an array called path. This will keep track of the order of nodes that we visit.
+        stack.push(startNode);
+        visited[startNode] = true;
 
-        // Create an index for the path array.
+        while (!stack.isEmpty()) {
+            int currentNode = stack.pop();
+            path[pathIndex++] = currentNode;
 
-        // Push our starting node to the stack. We can begin our traversal from any valid node. Let's begin our traversal at node 0.
+            int[] neighbors = graph[currentNode];
+            for (int neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            }
+        }
 
-        // Record the starting node as visited.
-
-        // While our stack is not empty i.e. while we still have nodes to explore ...
-
-            // Pop the node that we are currently visiting from the stack.
-
-            // Add the node that we are currently visiting to the path.
-
-            // Obtain an array of all neighbouring/adjacent nodes of the node that we are currently visiting.
-
-            // For each neighbouring/adjacent node ...
-
-                // If the neighbouring/adjacent node has not been visited ...
-
-                    // Record the neighbouring/adjacent node as visited.
-
-                    // Push the neighbouring/adjacent node onto the stack.
-
-
-
-
-        // Return the path.
-        return null;
+        return path;
 
     }
 
